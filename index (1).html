@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Novu Shop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">Novu<span>Shop</span></div>
+      <nav class="category-nav" id="categoryNav"></nav>
+      <div class="header-actions">
+        <div class="search-wrap">
+          <input type="text" id="searchInput" placeholder="Search products…" />
+          <span class="search-icon">⌕</span>
+        </div>
+        <button class="cart-btn" id="cartBtn">
+          🛒 Cart <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">New arrivals · Free shipping over $50</p>
+      <h1>Things you<br/><em>actually</em> want.</h1>
+      <p class="hero-sub">Curated electronics, gear, and lifestyle products — no noise.</p>
+      <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">⌨️</div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS SECTION -->
+  <main id="products">
+    <div class="section-header">
+      <h2 id="sectionTitle">All Products</h2>
+      <p id="productCount" class="product-count"></p>
+    </div>
+    <div class="product-grid" id="productGrid"></div>
+    <p class="empty-state" id="emptyState" style="display:none">No products found. Try a different search.</p>
+  </main>
+
+  <!-- CART SIDEBAR -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button class="close-btn" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-empty" id="cartEmpty">
+      <p>Your cart is empty.</p>
+      <button class="btn-primary" onclick="closeCart()">Keep Shopping</button>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="summary-row"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+      <div class="summary-row"><span>Tax (8%)</span><span id="tax">$0.00</span></div>
+      <div class="summary-row total"><span>Total</span><span id="total">$0.00</span></div>
+      <button class="btn-primary checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+  </aside>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="logo">Novu<span>Shop</span></div>
+      <p>© 2025 NovuShop. Midterm Project.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
