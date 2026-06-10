@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — NovuShop</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="checkout.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">Novu<span>Shop</span></a>
+      <div class="checkout-steps">
+        <span class="step active">1. Details</span>
+        <span class="step-divider">→</span>
+        <span class="step" id="step2">2. Payment</span>
+        <span class="step-divider">→</span>
+        <span class="step" id="step3">3. Confirm</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CHECKOUT LAYOUT -->
+  <main class="checkout-main">
+
+    <!-- LEFT: FORMS -->
+    <div class="checkout-forms">
+
+      <!-- STEP 1: Shipping -->
+      <section class="form-section" id="sectionShipping">
+        <h2 class="form-title">Shipping Details</h2>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="Jane" />
+            <span class="field-error" id="errFirstName"></span>
+          </div>
+          <div class="field">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Doe" />
+            <span class="field-error" id="errLastName"></span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="jane@example.com" />
+          <span class="field-error" id="errEmail"></span>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="(555) 000-0000" />
+          <span class="field-error" id="errPhone"></span>
+        </div>
+
+        <div class="field">
+          <label for="address">Street Address</label>
+          <input type="text" id="address" placeholder="123 Main St" />
+          <span class="field-error" id="errAddress"></span>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="city">City</label>
+            <input type="text" id="city" placeholder="Los Angeles" />
+            <span class="field-error" id="errCity"></span>
+          </div>
+          <div class="field field-sm">
+            <label for="state">State</label>
+            <select id="state">
+              <option value="">Select</option>
+              <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+              <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+              <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+              <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+              <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+              <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+              <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+              <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+              <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+              <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+              <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+              <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+              <option>WI</option><option>WY</option>
+            </select>
+            <span class="field-error" id="errState"></span>
+          </div>
+          <div class="field field-sm">
+            <label for="zip">ZIP Code</label>
+            <input type="text" id="zip" placeholder="90001" maxlength="5" />
+            <span class="field-error" id="errZip"></span>
+          </div>
+        </div>
+
+        <button class="btn-primary btn-next" onclick="goToPayment()">Continue to Payment →</button>
+      </section>
+
+      <!-- STEP 2: Payment -->
+      <section class="form-section hidden" id="sectionPayment">
+        <button class="back-btn" onclick="goToShipping()">← Back to Shipping</button>
+        <h2 class="form-title">Payment Info</h2>
+
+        <div class="card-icons">
+          <span class="card-icon">💳 Visa</span>
+          <span class="card-icon">💳 Mastercard</span>
+          <span class="card-icon">💳 Amex</span>
+        </div>
+
+        <div class="field">
+          <label for="cardName">Name on Card</label>
+          <input type="text" id="cardName" placeholder="Jane Doe" />
+          <span class="field-error" id="errCardName"></span>
+        </div>
+
+        <div class="field">
+          <label for="cardNumber">Card Number</label>
+          <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)" />
+          <span class="field-error" id="errCardNumber"></span>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="expiry">Expiry Date</label>
+            <input type="text" id="expiry" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)" />
+            <span class="field-error" id="errExpiry"></span>
+          </div>
+          <div class="field field-sm">
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" placeholder="123" maxlength="4" />
+            <span class="field-error" id="errCvv"></span>
+          </div>
+        </div>
+
+        <div class="secure-note">🔒 Your payment info is encrypted and secure.</div>
+
+        <button class="btn-primary btn-next" onclick="goToConfirm()">Review Order →</button>
+      </section>
+
+      <!-- STEP 3: Confirm -->
+      <section class="form-section hidden" id="sectionConfirm">
+        <button class="back-btn" onclick="goToPayment()">← Back to Payment</button>
+        <h2 class="form-title">Review & Place Order</h2>
+
+        <div class="confirm-block" id="confirmShipping"></div>
+        <div class="confirm-block" id="confirmPayment"></div>
+
+        <button class="btn-primary btn-place" onclick="placeOrder()">Place Order</button>
+      </section>
+
+    </div>
+
+    <!-- RIGHT: ORDER SUMMARY -->
+    <aside class="order-summary">
+      <h3 class="summary-title">Order Summary</h3>
+      <div id="summaryItems" class="summary-items"></div>
+      <div class="summary-empty" id="summaryEmpty" style="display:none">
+        <p>Your cart is empty.</p>
+        <a href="index.html" class="btn-primary">Go Shopping</a>
+      </div>
+      <div class="summary-totals" id="summaryTotals">
+        <div class="summary-row"><span>Subtotal</span><span id="sumSubtotal">$0.00</span></div>
+        <div class="summary-row"><span>Shipping</span><span class="free-ship">FREE</span></div>
+        <div class="summary-row"><span>Tax (8%)</span><span id="sumTax">$0.00</span></div>
+        <div class="summary-row total"><span>Total</span><span id="sumTotal">$0.00</span></div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- SUCCESS MODAL -->
+  <div class="modal-overlay hidden" id="successModal">
+    <div class="modal">
+      <div class="modal-icon">✅</div>
+      <h2>Order Placed!</h2>
+      <p>Thank you for your purchase. A confirmation has been sent to <strong id="confirmEmail"></strong>.</p>
+      <div class="order-num">Order #<span id="orderNum"></span></div>
+      <a href="index.html" class="btn-primary">Back to Shop</a>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="checkout.js"></script>
+</body>
+</html>
